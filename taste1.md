@@ -76,11 +76,17 @@ js的常见内置对象：`Date,Array,Math,Number,Boolean,String,Array,RegExp,Er
 ##数据类型检测
 ###Typeof
 typeof操作符是检测基本类型的最佳工具。
+
     "undefined" — 未定义
+
     "boolean"   — 布尔值
+
     "string"    — 字符串
+
     "number"    — 数值
+
     "object"    — 对象或null
+    
     "function"  — 函数
 
 ###Instanceof
@@ -247,13 +253,13 @@ Boolean转换对象很特别，除了以下六个值转换为false，其他都�
 写写博客打打球...要代码，要篮球，更要生活。。。
 
 
-  [1]: /img/bVCuxa
-  [2]: /img/bVCuxr
-  [3]: /img/bVCuxD
-  [4]: /img/bVCuyr
-  [5]: /img/bVCuyD
-  [6]: /img/bVCuyH
-  [7]: /img/bVCuyT
-  [8]: /img/bVCuzt
+  [1]: https://sfault-image.b0.upaiyun.com/130/011/1300118440-57c4093986c6d_articlex
+  [2]: https://sfault-image.b0.upaiyun.com/327/696/3276962861-57c4098d30fec_articlex
+  [3]: https://sfault-image.b0.upaiyun.com/214/291/2142910985-57c40b2ed77e8_articlex
+  [4]: https://sfault-image.b0.upaiyun.com/329/435/3294358084-57c40b4ec3602_articlex
+  [5]: https://sfault-image.b0.upaiyun.com/955/852/955852881-57c409c0cd3ad_articlex
+  [6]: https://sfault-image.b0.upaiyun.com/370/347/3703477448-57c40ac4d82a5_articlex
+  [7]: https://sfault-image.b0.upaiyun.com/260/647/2606476633-57c40b8cd72b3_articlex
+  [8]: https://sfault-image.b0.upaiyun.com/250/178/2501783615-57c40c141541f_articlex
   [9]: http://javascript.ruanyifeng.com/grammar/conversion.html
   [10]: http://www.2ality.com/2012/01/object-plus-object.html
