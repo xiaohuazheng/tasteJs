@@ -22,6 +22,7 @@ js的常见内置对象：`Date,Array,Math,Number,Boolean,String,Array,RegExp,Er
 
 操作的是变量实际保存的值。
     a = 2;
+
 ![图片描述][2]
 
 
@@ -57,7 +58,9 @@ js的常见内置对象：`Date,Array,Math,Number,Boolean,String,Array,RegExp,Er
 ![图片描述][8]
 
 漏画了，差一条指针。b的引用指针也指向`object{sex:'boy'}`
+
     b.sex;  //'boy'   a.name; //'boy'
+    
 ###堆&栈
 两者都是存放临时数据的地方。
 
@@ -86,7 +89,7 @@ typeof操作符是检测基本类型的最佳工具。
     "number"    — 数值
 
     "object"    — 对象或null
-    
+
     "function"  — 函数
 
 ###Instanceof
