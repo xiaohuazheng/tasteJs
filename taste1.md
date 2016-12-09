@@ -2,10 +2,14 @@
 
 ##数据类型定义
 ###数据类型分类
+
 基本数据类型：`String,boolean,Number,Symbol（ES6新增）,Undefined, Null`
+
 引用数据类型：`Object`
+
 基本数据类型中有两个为特殊数据类型： `null, undefined` 
-js的常见内置对象：`Date,Array,Math,Number,Boolean,String,Array,RegExp,Function...`
+
+js的常见内置对象：`Date,Array,Math,Number,Boolean,String,Array,RegExp,Error,Function...`
 
 
 
@@ -56,11 +60,17 @@ js的常见内置对象：`Date,Array,Math,Number,Boolean,String,Array,RegExp,Fu
     b.sex;  //'boy'   a.name; //'boy'
 ###堆&栈
 两者都是存放临时数据的地方。
+
 栈是先进后出的，就像一个桶，后进去的先出来，它下面本来有的东西要等其他出来之后才能出来。
+
 堆是在程序运行时，而不是在程序编译时，申请某个大小的内存空间。即动态分配内存，对其访问和对一般内存的访问没有区别。对于堆，我们可以随心所欲的进行增加变量和删除变量，不用遵循次序。
+
 栈区（stack） 由编译器自动分配释放   ，存放函数的参数值，局部变量的值等。 
+
 堆区（heap）  一般由程序员分配释放，若程序员不释放，程序结束时可能由OS回收。 
+
 堆（数据结构）：堆可以被看成是一棵树，如：堆排序； 
+
 栈（数据结构）：一种先进后出的数据结构。
 
 ##数据类型检测
@@ -75,6 +85,7 @@ typeof操作符是检测基本类型的最佳工具。
 
 ###Instanceof
 instanceof用于检测引用类型，可以检测到它是什么类型的实例。
+
 instanceof 检测一个对象A是不是另一个对象B的实例的原理是：查看对象B的prototype指向的对象是否在对象A的[[prototype]]链上。如果在，则返回true,如果不在则返回false。不过有一个特殊的情况，当对象B的prototype为null将会报错(类似于空指针异常)。
 
     var sXzaver = new String("Xzavier"); 
@@ -103,6 +114,7 @@ constructor不适用于null和undefined。除了这些原生的，constructor还
    
 ###Object.prototype.toString.call(obj)
 推荐使用：Object.prototype.toString.call(obj)
+
     原理：调用从Object继承来的原始的toString()方法
     
     Object.prototype.toString.call('xz'); //"[object String]"
@@ -140,11 +152,17 @@ constructor不适用于null和undefined。除了这些原生的，constructor还
     [] == ![];  // true
     '6' - '3'  // 3
     1234 + 'abcd' // "1234abcd"
+
 1.undefined与null相等，但不恒等（===）
+
 2.一个是number一个是string时，会尝试将string转换为number
+
 3.隐式转换将boolean转换为number，0或1
+
 4.隐式转换将Object转换成number或string，取决于另外一个对比量的类型
+
 5.对于0、空字符串的判断，建议使用 “===” 。
+
 6.“===”会先判断两边的值类型，类型不匹配时为false。
 
 ###显示转换
@@ -188,7 +206,9 @@ Number、String、Boolean转换对象时主要使用了对象内部的valueOf和
 
 ####Number转换对象：
 1.先调用对象自身的valueOf方法。如果返回原始类型的值，则直接对该值使用Number函数，返回结果。
+
 2.如果valueOf返回的还是对象，继续调用对象自身的toString方法。如果toString返回原始类型的值，则对该值使用Number函数，返回结果。
+
 3.如果toString返回的还是对象，报错。
 
     Number([1]); //1
@@ -198,7 +218,9 @@ Number、String、Boolean转换对象时主要使用了对象内部的valueOf和
     Number('1'); //1
 ####String转换对象
 1.先调用对象自身的toString方法。如果返回原始类型的值，则对该值使用String函数，返回结果。
+
 2.如果toString返回的是对象，继续调用valueOf方法。如果valueOf返回原始类型的值，则对该值使用String函数，返回结果。
+
 3.如果valueOf返回的还是对象，报错。
 
     String([1,2]) //"1,2"
