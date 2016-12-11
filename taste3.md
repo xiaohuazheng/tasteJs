@@ -111,3 +111,5 @@ JQuery方法：
     });
     
 cookie在持久保存客户端数据提供了方便，分担了服务器存储的负担，虽然有局限性，但是不可替代的。使用的方法也非常简单，但平时使用cookie的时候也需要多多注意安全性。
+
+HTML5新的API包括localStorage和sessionStorage见本系列后面的文章。
