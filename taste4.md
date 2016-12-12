@@ -1,4 +1,5 @@
 ##JavaScript-运算符
+
 JavaScript 有一系列操作数据值的运算符，运算符按照特定运算规则对操作数进行运算，将简单的表达式组合成复杂的表达式。
 
 ###一元运算符
@@ -309,5 +310,5 @@ JavaScript 有一系列操作数据值的运算符，运算符按照特定运算
   [1]: https://segmentfault.com/a/1190000005863067
   [2]: https://segmentfault.com/a/1190000006672446
   [3]: https://segmentfault.com/a/1190000006672446#articleHeader2
-  [4]: /img/bVCy3O
+  [4]: https://sfault-image.b0.upaiyun.com/236/463/2364636534-57c577652fdb2_articlex
   [5]: https://segmentfault.com/a/1190000005863067
