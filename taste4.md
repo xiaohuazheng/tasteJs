@@ -97,11 +97,17 @@ JavaScript 有一系列操作数据值的运算符，运算符按照特定运算
 
 
     321 > 123; //true
+
     123 > 321; //false
+
     '123' > 321; //false
+
     '321' > '1234'; //true
+
     'a' > 'b'; //false a=97,b=98
+
     'a' > 'B'; //true B=66
+
     1 > Object; //false
 
 在相等和不等的比较上，如果操作数是非数值，则遵循一下规则：
@@ -122,23 +128,40 @@ JavaScript 有一系列操作数据值的运算符，运算符按照特定运算
 
 
     123 == 123; //true
+
     '123' == 123; //true，'123'会转成成数值123
+
     false == 0; //true，false 转成数值就是0
+
     'a' == 'A'; //false，转换后的编码不一样
+
     123 == {}; //false，执行toString()或valueOf()会改变
+
     123 == NaN; //false，只要有NaN，都是false
+
     {} == {}; //false，比较的是他们的地址，每个新创建对象的引用地址都不同
 
+
     null == undefined //true
+
     'NaN' == NaN //false
+
     123 == NaN //false
+
     NaN == NaN //false
+
     false == 0 //true
+
     true == 1 //true
+
     true == 2 //false
+
     undefined == 0 //false
+
     null == 0 //false
+
     '123' == 123 //true
+    
     '123' === 123 //false
 
 
