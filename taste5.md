@@ -115,15 +115,14 @@ split(pattern) 返回字符串按指定pattern 拆分的数组:
 
 ####字符类：单个字符和数字	
 
-![clipboard.png](/img/bVzioH)
+<img src="https://sfault-image.b0.upaiyun.com/212/892/2128921545-578b6391d71e4_articlex">
 
-说一下/\\./ 和 /[.]/ 只能匹配'.',不匹配通配符
+注意： /\\./ 和 /[.]/ 只能匹配'.',不匹配通配符
 
 `\\` 引用符，用来将这里列出的这些元字符当作普通的字符来进行匹配。如.用来匹配点字符，而不是任何字符的通配符。
 
-`[ ]`,`[c1-c2]`,`[^c1-c2]`
 
-　　字符组，匹配括号中的任何一个字符,并不是要全部匹配。如/x[zav]e/匹配xze、xae和xve，但是不匹配xxe。如/[0-9]/可以匹配任何数字字符；如/[A-Za-z]/可以匹配任何大小写字母。如正则表达式`[^269A-Z]` 将匹配除了2、6、9和所有大写字母之外的任何字符。
+`[ ]`,`[c1-c2]`,`[^c1-c2]`字符组，匹配括号中的任何一个字符,并不是要全部匹配。如/x[zav]e/匹配xze、xae和xve，但是不匹配xxe。如/[0-9]/可以匹配任何数字字符；如/[A-Za-z]/可以匹配任何大小写字母。如正则表达式`[^269A-Z]` 将匹配除了2、6、9和所有大写字母之外的任何字符。
 
 对于这两个操作符，特殊符号没有绝对规律，倒是特殊字母匹配符还是有规律的，见下
 
@@ -149,17 +148,17 @@ split(pattern) 返回字符串按指定pattern 拆分的数组:
 
 ####字符类：空白字符	
 
-![clipboard.png](/img/bVzirU)
+<img src="https://sfault-image.b0.upaiyun.com/187/869/187869806-578b6b2b33b59_articlex">
 
 \\b是匹配字符串开头结尾及空格回车等的位置,单词边界, 不会匹配空格符本身。\\s则是匹配空白字符本身、空格符本身、换行符本身。
 
 ####字符类：锚字符
 
-![clipboard.png](/img/bVzir0)
+<img src="https://sfault-image.b0.upaiyun.com/417/611/4176112660-578b6b59e2e70_articlex">
 
 ####字符类：重复字符
 
-![clipboard.png](/img/bVzir2)
+<img src="https://sfault-image.b0.upaiyun.com/173/495/1734955041-578b6b8eee0b7_articlex">
 
 ####字符类：替代字符
 
@@ -278,7 +277,7 @@ QQ号：`[1-9]{4,}`
        });
     };
     console.log(str.initCap());  //Hello World
-    
+
 "yyyy-mm-dd" 格式的日期校验(平闰年)：
 
     function testDate(str) {
@@ -292,7 +291,8 @@ QQ号：`[1-9]{4,}`
 
 
 延伸阅读：[正则表达式的扩展][2]
-测试：[在线正则表达式测试][3]
+
+正则测试：[在线正则表达式测试][3]
 
 
   [1]: https://github.com/goyakin/es-regexp-lookbehind
