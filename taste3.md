@@ -1,6 +1,8 @@
-##JavaScript--cookie
+## JavaScript--cookie
+
 cookie可以像身份证一样在客户端请求服务器的时候确定信息。也可以在客户端分担服务端的压力，做很多判断和存储信息。
-###cookie 优缺点
+
+### cookie 优缺点
 
 优点：
 
@@ -20,7 +22,7 @@ cookie可以像身份证一样在客户端请求服务器的时候确定信息�
 
 3.有些状态不可能保存在客户端。例如，为了防止重复提交表单，我们需要在服务器端保存一个计数器。如果我们把这个计数器保存在客户端，那么它起不到任何作用。所以还是有一定的局限性。
 
-###设置cookie
+### 设置cookie
 
 一般主要设置cookie名字和值、cookie有效期、路径、域名、是否安全传输。
 
@@ -47,6 +49,7 @@ cookie可以像身份证一样在客户端请求服务器的时候确定信息�
     	document.cookie = cookieText; 
     } 
     
+
 JQuery方法（JQuery没有封装cookie方法，需要下载基于JQuery的插件jquery.cookie.js）：
 
     $.cookie('key','value',{
@@ -56,7 +59,7 @@ JQuery方法（JQuery没有封装cookie方法，需要下载基于JQuery的插�
         secure: false
     });
    
-###获取cookie 
+### 获取cookie 
 
 原生方法：
 
@@ -67,6 +70,7 @@ JQuery方法（JQuery没有封装cookie方法，需要下载基于JQuery的插�
     var username=document.cookie.split(";")[0].split("=")[1];
     var password=document.cookie.split(";")[1].split("=")[1];
     
+
 封装方法：
 
     function getCookie(key) {     
@@ -83,11 +87,13 @@ JQuery方法（JQuery没有封装cookie方法，需要下载基于JQuery的插�
     	return cookieValue; 
     } 
     
+
 JQuery方法：
 
     $.cookie(‘key’); //value?value:null
     
-###删除cookie
+
+### 删除cookie
 
 原生方法：
 
