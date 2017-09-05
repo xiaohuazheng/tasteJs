@@ -7,12 +7,14 @@ JavaScript 有一系列操作数据值的运算符，运算符按照特定运算
 一元运算符只能操作一个值。
 
 累加累减运算符：
-
-    var xzavier = 123;
+    
+    ```javascript
+    var xzavier = 123;
     xzavier++  //把变量累加1，相当于xavier = xavier + 1
     ++xzavier  //把变量累加1，相当于xavier = xavier + 1
     xzavier--  //把变量累减1，相当于xavier = xavier - 1
     --xzavier  //把变量累减1，相当于xavier = xavier - 1
+    ```
 
 上述代码不只是`++--`前后置的区别，当有赋值操作时，区别为：
 
