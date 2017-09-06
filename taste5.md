@@ -262,7 +262,8 @@ QQ号：`[1-9]{4,}`
 
 数字串千分法：
 
- `function commafy(num){
+ ```
+ function commafy(num){
       return num && num
           .toString()
           .replace(/(\d)(?=(\d{3})+\.)/g, function($1, $2){
@@ -270,8 +271,8 @@ QQ号：`[1-9]{4,}`
           });
   }
   commafy(1234567.002);
-  // 1,234,567.002"
-  `
+  // "1,234,567.002"
+  ```
 
 判断手机app内置浏览器：
 
