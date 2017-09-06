@@ -1,9 +1,10 @@
-##JavaScript-正则表达式
-###正则表达式简述
+## JavaScript-正则表达式
+
+### 正则表达式简述
 
 正则表达式(regular expression)描述了一种字符串匹配模式，可以用来检查一个字符串是否含有某类字符串、将匹配的字符串做替换或者从某个字符串中取出符合某个条件的字符串等。ECMAScript的RegExp对象表示正则表达式，而String 和RegExp 都定义了使用正则表达式进行强大的模式匹配和文本检索与替换的函数。
 
-###正则表达式修饰符
+### 正则表达式修饰符
 
     参数       含义                           备注
     i       忽略大小写
@@ -12,7 +13,8 @@
     u       正确处理四个字节的UTF-16编码       ES6新增
     y       确保匹配必须从剩余的第一个位置开始   ES6新增
     
-###正则表达式创建
+### 正则表达式创建
+
 创建正则表达式和创建字符串类似，创建正则表达式提供了两种方法，一种是采用new
 运算符，另一个是采用字面量方式。
 
@@ -27,7 +29,7 @@
     var reg = 'v';
     var pattern = new RegExp('xza' + reg + 'ier'); // 这时候就不能使用字面量的方式了
 
-###正则表达式方法
+### 正则表达式方法
 
 RegExp 对象的test() 方法在字符串中查找是否存在指定的正则表达式并返回布尔值，如果存在则返回true，不存在则返回false。 
 
@@ -77,7 +79,7 @@ split(pattern) 返回字符串按指定pattern 拆分的数组:
     var str = 'This is Xzavier, this is Xzavier too.'; 
     console.log(str.split(pattern));   //["This", "is", "Xzavier,", "this", "is", "Xzavier", "too."]
 
-###RegExp对象的静态属性
+### RegExp对象的静态属性
 
     属性              短名      含义
     input             $_    当前被匹配的字符串
@@ -95,7 +97,7 @@ split(pattern) 返回字符串按指定pattern 拆分的数组:
     console.log(RegExp.lastMatch); //xzavier
     console.log(RegExp.lastParen); //x
 
-###RegExp对象的实例属性
+### RegExp对象的实例属性
 
     属性                   含义
     global       Boolean值，表示g是否已设置
@@ -111,9 +113,9 @@ split(pattern) 返回字符串按指定pattern 拆分的数组:
     console.log(pattern.lastIndex); //0，下次匹配位置
     console.log(pattern.source); //xzavier，正则表达式的源字符串
 
-###正则表达式元字符
+### 正则表达式元字符
 
-####字符类：单个字符和数字	
+#### 字符类：单个字符和数字	
 
 <img src="https://sfault-image.b0.upaiyun.com/212/892/2128921545-578b6391d71e4_articlex">
 
@@ -146,7 +148,7 @@ split(pattern) 返回字符串按指定pattern 拆分的数组:
     '    lovte.'.replace(/[t]/, ''); //"    love."  匹配字母
     '    lovte.'.replace(/[\t]/, '');  //"lovte."  要加一个\才匹配制表符
 
-####字符类：空白字符	
+#### 字符类：空白字符	
 
 <img src="https://sfault-image.b0.upaiyun.com/187/869/187869806-578b6b2b33b59_articlex">
 
@@ -156,15 +158,15 @@ split(pattern) 返回字符串按指定pattern 拆分的数组:
 
 <img src="https://sfault-image.b0.upaiyun.com/417/611/4176112660-578b6b59e2e70_articlex">
 
-####字符类：重复字符
+#### 字符类：重复字符
 
 <img src="https://sfault-image.b0.upaiyun.com/173/495/1734955041-578b6b8eee0b7_articlex">
 
-####字符类：替代字符
+#### 字符类：替代字符
 
     a|b|c    匹配a或b或c中的任意一个
 
-####字符类：记录字符
+#### 字符类：记录字符
 
     $n     与 regexp 中的第 n(1~99) 个子表达式相匹配的文本
     $&     表示与 regexp 相匹配的子串
@@ -176,7 +178,7 @@ split(pattern) 返回字符串按指定pattern 拆分的数组:
     'leftright'.replace(/right/, '$`');  //"leftleft"
     'leftright'.replace(/left/, "$'");  //"rightright"
 
-###贪婪模式和惰性模式
+### 贪婪模式和惰性模式
 
     贪婪  惰性
     '+'   +?
@@ -196,7 +198,7 @@ split(pattern) 返回字符串按指定pattern 拆分的数组:
     var result = str.replace(pattern, 'xxx');
     console.log(result);  //xxxqqwwweee
 
-###断言
+### 断言
 
 先行断言： x(?=y)，找到x后面紧跟着y的位置，如果找到则匹配这个位置
 
@@ -224,7 +226,7 @@ split(pattern) 返回字符串按指定pattern 拆分的数组:
 
 这代码现在是不能使用的，但是我们想要实现类似的功能，用别的方式，多写两行代码也就实现了。
 
-###捕获性分组和非捕获性分组
+### 捕获性分组和非捕获性分组
 
 捕获性分组
 
@@ -238,7 +240,7 @@ split(pattern) 返回字符串按指定pattern 拆分的数组:
     var str = '123abc';
     console.log(pattern.exec(str));  //["123a", "123"]
 
-###常用正则表达式
+### 常用正则表达式
 
 亲测有效：
 
