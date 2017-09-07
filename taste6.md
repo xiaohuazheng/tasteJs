@@ -1,9 +1,11 @@
-##JavaScript-DOM
-###DOM简介
+## JavaScript-DOM
+
+### DOM简介
 
 DOM（Document Object Model）即文档对象模型，针对HTML 和XML 文档的API（应用程序接口）。DOM 描绘了一个层次化的节点树，运行开发人员添加、移除和修改页面的某一部分。通过 DOM，可以访问所有的 HTML 元素，连同它们所包含的文本和属性。可以对其中的内容进行修改和删除，同时也可以创建新的元素。document对象是文档的根节点，window.document属性就指向这个对象。
 
-###DOM节点
+### DOM节点
+
 分为元素节点、属性节点和文本节点。
 
 而这些节点又有三个非常有用的属性，分别为：nodeName、nodeType 和nodeValue
@@ -25,7 +27,7 @@ F12打开console，即可操作当前网页节点：
     document.getElementById('mainLike').firstChild.nodeType  //3
     document.getElementById('mainLike').firstChild.nodeValue  //"0 推荐"
 
-###DOM元素选择
+### DOM元素选择
 
           方法                      说明                  备注
     getElementById()          获取特定ID元素的节点       获取单个节点对象
@@ -46,7 +48,7 @@ querySelectorAll 和getElementsBy获取节点数组系列方法有一个很重�
 具体可参见[知乎提问，答案很详细][2]
     
 
-###获取HTML元素属性
+### 获取HTML元素属性
 
     属性         说明
     id        元素节点的id 名称
@@ -64,12 +66,12 @@ querySelectorAll 和getElementsBy获取节点数组系列方法有一个很重�
     document.getElementById('xzavier').className; //获取class
     document.getElementById('xzavier').className = 'xzavier'; //设置class
 
-###属性方法
+### 属性方法
     getAttribute()            获取特定元素节点属性的值
     setAttribute()            设置特定元素节点属性的值
     removeAttribute()         移除特定元素节点属性
 
-####getAttribute()方法
+#### getAttribute()方法
 
 getAttribute()方法将获取元素中某个属性的值。它和直接使用.属性获取属性值的方法有一定区别。
 
@@ -96,14 +98,14 @@ Attribute：特性，区别于property，attribute只能是字符串，大小写
 
 2).href：getAttribute获取的是href的实际值，而点号获取的是完整的url，存在浏览器差异。
 
-####setAttribute()方法
+#### setAttribute()方法
 
 setAttribute()方法将设置元素中某个属性和值。它需要接受两个参数：属性名和值。如果属性本身已存在，那么就会被覆盖。
 
     document.getElementById('xzavier').setAttribute('align','center');//设置属性和值
     document.getElementById('xzavier').setAttribute('xzavier','123456');//设置自定义的属性和值
 
-####removeAttribute()方法
+#### removeAttribute()方法
 
 removeAttribute()可以移除HTML 属性。
 
@@ -111,7 +113,7 @@ removeAttribute()可以移除HTML 属性。
 
 PS：IE6 及更低版本不支持removeAttribute()方法。
 
-###层次节点属性
+### 层次节点属性
 
 节点的层次结构可以划分为：父节点与子节点、兄弟节点这两种。当我们获取其中一个元素节点的时候，就可以使用层次节点属性来获取它相关层次的节点。
 
@@ -125,7 +127,7 @@ PS：IE6 及更低版本不支持removeAttribute()方法。
     nextSibling     获取当前节点的后一个同级节点
     attributes      获取当前元素节点的所有属性节点集合
 
-###节点操作
+### 节点操作
 
           方法                说明
     write()           把任意字符串插入到文档中
@@ -149,8 +151,9 @@ PS：IE6 及更低版本不支持removeAttribute()方法。
     xzavier.appendChild(clone); //添加到子节点列表末尾
     xzavier.parentNode.removeChild(xzavier); //删除指定节点
     
-###DOM操作内容
-####innerText
+### DOM操作内容
+
+#### innerText
 
     document.getElementById('xzavier').innerText; //获取文本内容(如有html 直接过滤掉)
     document.getElementById('xzavier').innerText = 'xzavier'; //设置文本(如有html 转义)
@@ -171,7 +174,7 @@ PS：IE6 及更低版本不支持removeAttribute()方法。
         }
     }
 
-####innerHTML
+#### innerHTML
 
     document.getElementById('xzavier').innerHTML; //获取文本(不过滤HTML)
     document.getElementById('xzavier').innerHTML = '<b>xzavier</b>'; //可解析HTML
@@ -183,8 +186,9 @@ PS：IE6 及更低版本不支持removeAttribute()方法。
 
 还有两个方法outerText，outerHTML基本不怎么用。最常用的innerHTML 属性和节点操作方法的比较，在插入大量HTML 标记时使用innerHTML 的效率明显要高很多。因为在设置innerHTML 时，会创建一个HTML 解析器。这个解析器是浏览器级别的(C++编写)，因此执行JavaScript 会快的多。但，创建和销毁HTML 解析器也会带来性能损失。最好控制在最合理的范围内。
 
-###获取元素大小
-####clientWidth 和clientHeight
+### 获取元素大小
+
+#### clientWidth 和clientHeight
 
 这组属性可以获取元素可视区的大小，可以得到元素内容及内边距所占据的空间大小。
 
@@ -201,7 +205,7 @@ PS：IE6 及更低版本不支持removeAttribute()方法。
 
 4.增加内边距，最终值等于原本大小加上内边距的大小
 
-####scrollWidth 和scrollHeight
+#### scrollWidth 和scrollHeight
 
 这组属性可以获取滚动内容的元素大小。
 
@@ -212,7 +216,7 @@ PS：IE6 及更低版本不支持removeAttribute()方法。
 
 2.增加滚动条，最终值会等于原本大小减去滚动条大小
 
-####offsetWidth 和offsetHeight
+#### offsetWidth 和offsetHeight
 
 这组属性可以返回元素实际大小，包含边框、内边距和滚动条。
 
@@ -229,20 +233,24 @@ PS：IE6 及更低版本不支持removeAttribute()方法。
 
 4.增加滚动条，无变化，不会减小
 
-####clientLeft 和clientTop
+#### clientLeft 和clientTop
 
 这组属性可以获取元素设置了左边框和上边框的大小。
 
     xzavier.clientLeft; //获取左边框的长度
     xzavier.clientTop; //获取上边框的长度
-####offsetLeft 和offsetTop
+    
+#### offsetLeft 和offsetTop
+
 这组属性可以获取当前元素相对于父元素的位置。
 
     xzavier.offsetLeft; //20
     xzavier.offsetTop;  //20
 
 获取元素当前相对于父元素的位置，最好将它设置为定位position:absolute；否则不同的浏览器会有不同的解释。加上边框和内边距不会影响它的位置，但加上外边据会累加。
-####scrollTop 和scrollLeft
+
+#### scrollTop 和scrollLeft
+
 这组属性可以获取滚动条被隐藏的区域大小，也可设置定位到该区域。
 
     xzavier.scrollTop;  //获取滚动内容上方的位置
@@ -253,7 +261,8 @@ PS：IE6 及更低版本不支持removeAttribute()方法。
     function scrollStart(element) {
         if (element.scrollTop != 0) element.scrollTop = 0;
     }
-###document对象属性
+    
+### document对象属性
 
          属性	                  说明
     document.title	         设置文档标题
@@ -268,7 +277,7 @@ PS：IE6 及更低版本不支持removeAttribute()方法。
 一般来说用的多的也就title，URL，cookie，charset等，其他的就不列了。
 
 
-先写这么些，打篮球去了。代码，篮球，生活...DOM有太多内容了，多多学习，多多总结
+先写这么些，打篮球去了。代码，篮球，生活...
 
 
   [1]: https://segmentfault.com/a/1190000006667079
