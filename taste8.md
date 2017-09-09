@@ -21,6 +21,7 @@ javascript会判断括号里的条件表达式的值。如果值为truthy类型�
 ### if (条件表达式) {语句;} else {语句;}
 
 if为真值（Boolean转换），则执行if里的代码，否则执行else里的代码。
+
     if (2 > 1) {
     	console.log('xzavier win'); 
     } else {
@@ -73,6 +74,7 @@ JavaScript其实是没有else if的，else if算是一种封装。看这里的js
 我...所以，也根据语言规范，先对 <= 的另一面求值，再“非正即反”。
 
 那么回到else if呢，上面的代码其实最终是这样的：
+
     if (1 > 2) {
     	console.log('xzavier win'); 
     } else {
@@ -83,7 +85,8 @@ JavaScript其实是没有else if的，else if算是一种封装。看这里的js
     	}
     }
 
-把它拆分为多个if...else... 这只是个探究，因为else if司空见惯，代码又少，语义很好，所以使用得多。所以，尽情的使用吧，我的意思是别避开写else...if...，不是写一大堆else...if...，如果有一堆else...if...，那还是用下面的switch吧
+把它拆分为多个if...else... 这只是个探究，因为else if司空见惯，代码又少，语义很好，所以使用得多。
+所以，尽情的使用吧，我的意思是别避开写else...if...，不是写一大堆else...if...，如果有一堆else...if...，那还是用下面的switch吧
 
 ## switch语句
 
@@ -106,7 +109,8 @@ switch 语句是多重条件判断，用于多个值相等的比较。
 
 if和switch之间可以转换，当条件过多时，使用switch可以让代码更清晰，更好看。
 
-这里说一下switch，它对括号里的语句求值一次，然后将返回值与每个case表达式进行匹配。如果找到一个匹配，就会开始执行那个匹配的case里的代码，直到遇到一个break或者直到switch块末尾。
+这里说一下switch，它对括号里的语句求值一次，然后将返回值与每个case表达式进行匹配。
+如果找到一个匹配，就会开始执行那个匹配的case里的代码，直到遇到一个break或者直到switch块末尾。
 所以，写好`break`，很重要：
 
     var xzavier = 'boy';
