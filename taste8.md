@@ -66,6 +66,7 @@ JavaScript其实是没有else if的，else if算是一种封装。看这里的js
 对象的比较，可以参见本系列判断相关的文章。
 
 看上面没问题是吧，但是用 >= 就不一样了：
+
     a <= b;    // true
     a >= b;    // true
 
@@ -85,6 +86,7 @@ JavaScript其实是没有else if的，else if算是一种封装。看这里的js
 把它拆分为多个if...else... 这只是个探究，因为else if司空见惯，代码又少，语义很好，所以使用得多。所以，尽情的使用吧，我的意思是别避开写else...if...，不是写一大堆else...if...，如果有一堆else...if...，那还是用下面的switch吧
 
 ## switch语句
+
 switch 语句是多重条件判断，用于多个值相等的比较。
 
     var xzavier = 'boy';
@@ -145,6 +147,7 @@ if和switch之间可以转换，当条件过多时，使用switch可以让代码
 还有一点就是 `default` 非必需，位置也可以不固定。因为js总是先去匹配表达式的返回值和每一个case表达式，最终没有找到匹配的case，就会寻找default，找到了则执行default里的语句。没找到则执行到switch块末尾。
 
 ## do...while语句
+
 do...while 语句是一种先运行，后判断的循环语句。也就是说，不管条件是否满足，至少先运行一次循环体。
 
     var xzavier = 1; 
@@ -160,7 +163,9 @@ do...while 语句是一种先运行，后判断的循环语句。也就是说，
         xzavier++;
     } while (xzavier <= 0);//先运行一次，再判断
     // 1
+    
 ## while语句
+
 while 语句是一种先判断，后运行的循环语句。
 
     var xzavier = 1; 
@@ -175,6 +180,7 @@ while 语句是一种先判断，后运行的循环语句。
     	console.log(xzavier); // 不会执行
     	xzavier++;
     } 
+    
 ## for语句
 
 for 语句也是一种先判断，后运行的循环语句。但它具有在执行循环之前初始变量和定义循环后要执行代码的能力。
@@ -274,11 +280,12 @@ for...in是为遍历对象属性设计的，但是它可以遍历数组，我去
 它访问了数组新增的 "name" 属性，因为 for-in 遍历了对象的所有属性。
 
 甚至包括原型链上的所有可枚举的属性：
+
     var arr = [1,2,3];
-        arr.name = 'xzavier';Array.prototype.oname = 'xzavier.chris'
-        for(var i in arr) {
-        	console.log(i + '--' + arr[i]);
-        }
+    arr.name = 'xzavier';Array.prototype.oname = 'xzavier.chris'
+	for(var i in arr) {
+		console.log(i + '--' + arr[i]);
+	}
     VM236:4 0--1
     VM236:4 1--2
     VM236:4 2--3
@@ -457,6 +464,7 @@ ES6提供for...of循环，允许遍历获得键值。如果要通过for...of循�
     for (let i of str) {
           console.log(i); // x z a v i e r
     }
+    
 ## break和continue语句
 
 break 和continue 语句用于在循环中精确地控制代码的执行。其中，break 语句会立即退出循环，强制继续执行循环体后面的语句。而continue 语句退出当前循环，继续后面的循环。
@@ -543,7 +551,7 @@ break 和continue 语句用于在循环中精确地控制代码的执行。其�
 
 当然，我们也不建议使用这样的写法，并没有那么好用。举例很随意，并非要实现一个这样的业务。如果要实现类似的功能，用continue换个写法就OK了。这里主要说明下我们还是有这样的写法存在的，用不用看你心情，看你的场景，以及你的团队同不同意。
   
-##with语句
+## with语句
 
 with语句的作用是将代码的作用域设置到一个特定的对象中。当代码运行到with语句时，执行上下文的作用域链临时被改变了。一个新的可变对象被创建，它包含了参数指定的对象的所有属性。这个对象将被推入作用域链的头部，这意味着函数的所有局部变量现在处于第二个作用域链对象中，因此访问代价更高了。如果，再挖深一点，JavaScript 引擎在编译阶段遇到with字段都不能好好的干活儿了，因为它不知道这个with最后会怎么改变作用域，本想把变量作用域都安置好都不行了。所以，一般不建议使用。
 
