@@ -25,6 +25,7 @@ DOM0模型即内联模型，这种模型是最传统接单的一种处理事件�
 #### 脚本模型
 
 内联模型违反了HTML 与JavaScript 代码层次分离的原则。脚本模型让我们可以在JavaScript 中处理事件。
+
     <input type="button" id="myBotton" value="click me " />
     var oBotton = document.getElementById('myBotton');
     oBotton.onclick = function () {
