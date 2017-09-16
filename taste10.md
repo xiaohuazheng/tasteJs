@@ -1,12 +1,12 @@
-##JavaScript-事件event
+## JavaScript-事件event
 
 JavaScript中，事件一般是指浏览器和用户操作进行交互。我们可以通过侦听器（或者处理程序）来预定事件，以便事件发生的时候执行相应的代码。
 
-###事件模型
+### 事件模型
 
 JavaScript的事件模型有DOM0，脚本模型，DOM2&DOM3三个模型。
 
-####DOM0模型
+#### DOM0模型
 
 DOM0模型即内联模型，这种模型是最传统接单的一种处理事件的方法。在内联模型中，事件处理函数是HTML标签的一个属性，用于处理指定事件。虽然内联在早期使用较多，但它是和HTML 混写的，并没有与HTML 分离。
 
@@ -22,7 +22,7 @@ DOM0模型即内联模型，这种模型是最传统接单的一种处理事件�
 
 其实世上本来没有DOM0，叫的人多了,也就有了DOM0。1998 年 10 月 DOM1级规范成为 W3C 的推荐标准，在此之前的实现我们就习惯称为DOM0级，后来就都叫DOM0了。
 
-####脚本模型
+#### 脚本模型
 
 内联模型违反了HTML 与JavaScript 代码层次分离的原则。脚本模型让我们可以在JavaScript 中处理事件。
     <input type="button" id="myBotton" value="click me " />
@@ -31,7 +31,7 @@ DOM0模型即内联模型，这种模型是最传统接单的一种处理事件�
       console.log('xzavier win win');
     };  //点击在打印台输出 xzavier win win
 
-####DOM2&DOM3模型
+#### DOM2&DOM3模型
 
 DOM2和DOM3级别则在这个结构的基础上引入了更多的交互能力，也支持了更高级的XML特性。为此DOM2和DOM3级分为许多模块（模块之间具有某种关联），分别描述了DOM的某个非常具体的子集。
 
@@ -87,11 +87,11 @@ IE 实现了与DOM2 中类似的两个方法：attachEvent()和detachEvent()。�
         }
     };
 
-###事件类型
+### 事件类型
 
 JavaScript 可以处理的事件类型为：鼠标事件、键盘事件、HTML 事件。
 
-####鼠标事件
+#### 鼠标事件
 
     <input type="button" id="myBotton" value="click me " />
     var oBotton = document.getElementById('myBotton'); 
@@ -160,7 +160,7 @@ mouseout与mouseleave
     ondragleave - 当被鼠标拖动的对象离开其容器范围内时触发此事件
     ondrop - 在一个拖动过程中，释放鼠标键时触发此事件
 
-####键盘事件
+#### 键盘事件
 
     keydown：当用户按下键盘上任意键触发，如果按住不放，会重复触发。
     onkeydown = function () {
@@ -177,7 +177,7 @@ mouseout与mouseleave
 
 keydown返回的是键盘的代码, keypress返回的是ASCII字符。如果只想读取字符, 用keypress, 如果想读各键的状态, 用keydown.
 
-####HTML 事件
+#### HTML 事件
 
     load：当页面完全加载后在window 上面触发，或当框架集加载完毕后在框架集上触发。
     window.onload = function () {
@@ -222,7 +222,7 @@ keydown返回的是键盘的代码, keypress返回的是ASCII字符。如果只�
     	console.log('xzavier is so ...');
     };
 
-###事件对象
+### 事件对象
 
 事件对象就是event 对象，通过处理函数传递。
 
@@ -251,7 +251,7 @@ event 对象的属性
 
 event.target 得到的是触发元素的DOM，event.currentTarget 得到的是监听元素的DOM。而this 也是得到监听元素的DOM。
 
-###冒泡和默认行为
+### 冒泡和默认行为
 
 如果在页面中重叠了多个元素，并且重叠的这些元素都绑定了同一个事件，那么就会出现冒泡问题。
 
@@ -274,6 +274,7 @@ event.target 得到的是触发元素的DOM，event.currentTarget 得到的是�
 当点击文档的时候，只触发文档事件；当点击div 层时，触发了div 和文档两个；当我们点击按钮时，触发了按钮、div 和文档。触发的顺序是从小范围到大范围。这就是所谓的冒泡现象，一层一层往上冒泡触发。
 
 网页中的元素，在操作的时候会有自己的默认行为。比如：右击文本框输入区域，会弹出系统菜单、点击超链接会跳转到指定页面、点击提交按钮会提交数据。我们可以组织默认行为的发生
+
     //禁止链接跳转
     $('a').click(function (e) {
         e.preventDefault();
@@ -299,7 +300,7 @@ event.target 得到的是触发元素的DOM，event.currentTarget 得到的是�
     stopImmediatePropagation()      取消事件冒泡，并取消该事件的后续事件处理函数
     isImmediatePropagationStopped() 判断是否调用了stopImmediatePropagation()方法
 
-###捕获冒泡
+### 捕获冒泡
 
 1.事件冒泡：事件按照从最特定的事件目标到最不特定的事件目标(一般为document对象)的顺序触发。
 
@@ -325,7 +326,7 @@ event.target 得到的是触发元素的DOM，event.currentTarget 得到的是�
     	在W3c中，使用preventDefault()方法；
     	在IE下设置window.event.returnValue = false;
 
-###事件委托
+### 事件委托
 
 事件委托的原理就是事件冒泡。使用事件委托技术可以让你对每个节点添加事件监听器，事件监听器被添加到它们的父元素上。事件监听器会分析从子元素冒泡上来的事件，找到是哪个子元素的事件。
 获取点击的元素的信息：
