@@ -13,7 +13,7 @@ Ajax技术核心是XMLHttpRequest 对象(简称XHR)，提供了向服务器发�
     function CreateXHR() {
         if(window.XMLHttpRequest){
             return new XMLHttpRequest();
-        }else{
+        } else {
             return new ActiveXObject('Microsoft.XMLHTTP');
         }
     }
@@ -233,14 +233,15 @@ node端：node学习（朴灵的书： 深入浅出nodeJs）
 
     //用户注册时判断用户名是否已存在
     app.post('/isuser', function(req, res) {
-      var username = req.body.username;
-      User.isUser(username, function(status){  //查询数据库，牵扯知识点多，不详述    
-        if(status == 'OK'){
-          res.send(200);          
-        }else{
-          res.send(404);
-        }
-      });
+        var username = req.body.username;
+        User.isUser(username, function(status){
+            //查询数据库，牵扯知识点多，不详述    
+            if (status == 'OK'){
+                res.send(200);          
+            } else {
+                res.send(404);
+            }
+        });
     });
 
 ### Ajax优缺点
