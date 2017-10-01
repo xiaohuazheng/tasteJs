@@ -107,6 +107,7 @@ Javascript中，如果一个对象不再被引用，那么这个对象就会被G
 #### 2.维持一个变量不被回收。
 
 由于闭包，函数a中i的一直存在于内存中，因此每次执行c()，都会给i自加1，且i不被垃圾回收机制回收。
+
     function a() {  
         var i = 1;  
         function b() { 
@@ -210,7 +211,7 @@ Javascript中，如果一个对象不再被引用，那么这个对象就会被G
     var xz = new Xzavier();  //Xzavier就是一个类，可以实例化
     console.log(xz.getName());  // "xzavier"  
 
-这里是原型继承，我会在下一篇文章讲一讲原型继承。
+这里是原型继承：
 
     var X = function(){};
     X.prototype = new Xzavier(); 
