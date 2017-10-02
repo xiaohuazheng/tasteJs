@@ -1,289 +1,240 @@
-## JavaScript-闭包
+## JavaScript-原型&原型链&原型继承
 
-闭包(closure)是一个让人又爱又恨的something，它可以实现很多高级功能和应用，同时在理解和应用上有很多难点和需要小心注意的地方。
+JavaScript的原型是一个重要的知识点，很多扩展应用都是从原型出发的。要说原型，我们先简单说一下函数创建过程。上一篇文章用闭包实现类和继承中用的是原型继承，今天就讲一讲原型继承。更多继承在后面的文章中更新。
 
-### 闭包的定义
+### 函数创建过程
 
-闭包，官方对闭包的解释是：一个拥有许多变量和绑定了这些变量的环境的表达式（通常是一个函数），因而这些变量也是该表达式的一部分。
+    function Xzavier() {};
 
-简单来说，闭包就是能够读取其他函数内部变量的函数。在Javascript中，只有函数内部的子函数才能读取函数的局部变量，所以，可以把闭包理解成：定义在一个函数内部的函数，也就是函数嵌套函数，给函数内部和函数外部搭建起一座桥梁。
+    1.创建一个对象（有constructor属性及[[Prototype]]属性），其中[[Prototype]]属性不可访问、不可枚举。
+    2.创建一个函数（有name、prototype属性），再通过prototype属性 引用第1步创建的对象。
+    3.创建变量Xzavier，同时把函数的引用赋值给变量Xzavier。
 
-### 闭包的特点
+#### 构造函数
 
-    1. 定义在一个函数内部的函数。
-    2. 函数内部可以引用函数外部的参数和变量。
-    3. 作为一个函数变量的一个引用，当函数返回时，其处于激活状态。
-    4. 当一个函数返回时，一个闭包就是一个没有释放资源的栈区。函数的参数和变量不会被垃圾回收机制回收。
+构造函数是用来新建同时初始化一个新对象的函数，所以，任何一个函数都可以是构造函数。只是我们在写代码的时候一般首字母大写以便区分使用。
 
-### 闭包的形成
+### 原型
 
-Javascript允许使用内部函数，可以将函数定义和函数表达式放在另一个函数的函数体内。而且，内部函数可以访问它所在的外部函数声明的局部变量、参数以及声明的其他内部函数。当其中一个这样的内部函数在包含它们的外部函数之外被调用时，就会形成闭包。
+每个函数在创建的时候js都自动添加了prototype属性，这就是函数的原型，原型就是函数的一个属性，类似一个指针。原型在函数的创建过程中由js编译器自动添加。
 
-    function a() {  
-        var i = 0;  
-        function b() { 
-            console.log(i++); 
-        }  
-        return b; 
+    function Xzavier() {
+        this.name = 'xzavier';
+        this.sex = 'boy';
+        this.job = "jser";
     }
-    var c = a(); 
-    c();
+    //给A添加属性
+    Xzavier.age = 23;
+    //给A的原型对象添加属性
+    Xzavier.prototype.sports = function() {console.log('basketball')}
+    Xzavier.prototype = {
+        hobbit1: function() {console.log('basketball');},
+        hobbit2: function() {console.log('running');}
+    }; 
 
-### 闭包的缺点
+### 原型链
 
-1.由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大。所以在闭包不用之后，将不使用的局部变量删除，使其被回收。在IE中可能导致内存泄露，即无法回收驻留在内存中的元素，这时候需要手动释放。
+在JavaScript中，每个对象都有一个[[Prototype]]属性，其保存着的地址就构成了对象的`原型链`。
 
-    function a() {  
-        var i = 1;  
-        function b() { 
-            console.log(i++); 
-        }  
-        return b; 
+[[Prototype]]属性是js编译器在对象被创建时自动添加的，其取值由new运算符的右侧参数决定。字面量的方式可转化为`new Obejct();`
+
+    var x = new Xzavier();
+    vae o = {};  //var o = new Obejct();
+
+通过对象的[[Prototype]]保存对另一个对象的引用，通过这个引用往上进行属性的查找，这就是`原型链查找机制`。
+
+对象在查找某个属性的时候，会首先遍历自身的属性，如果没有则会继续查找`[[Prototype]]`引用的对象，如果再没有则继续查找`[[Prototype]].[[Prototype]]`引用的对象，依次类推，直到`[[Prototype]].….[[Prototype]]`为`undefined`
+    
+    var str = new String('xzavier');
+    str
+    
+
+![图片描述][1]
+    
+`Object.prototype`的`[[Prototype]]`就是`undefined`
+
+    function Xzavier() {
+        this.name = 'xzavier';
     }
-    var c = a(); 
-    c(); //1
-    c(); //2
-    c(); //3   i不被回收
-    c = null;  //i被回收
+    var x = new Xzavier();
+    x.age = 23;
+    
+    console.log(x.job);  // 获取x的job属性 undefined
 
-2.闭包会在父函数外部，改变父函数内部变量的值。如果你把父函数当作对象使用，把闭包当作它的公用方法，把内部变量当作它的私有属性，要小心，不要随便改变父函数内部变量的值。
+    1、遍历x对象本身，结果x对象本身没有job属性
+    2、找到x的[[Prototype]]，也就是其对应的对象Xzavier.prototype，同时进行遍历。     Xzavier.prototype也没有job属性
+    3、找到Xzavier.prototype对象的[[Prototype]]，指向其对应的对象Object.prototype。Object.prototype也没有job属性
+    4、寻找Object.prototype的[[Prototype]]属性，返回undefined。
 
-    var Xzavier = { 
-        ten:10,  
-        addTen: function(num) {  
-           return this.ten + num;   //给一个数加10 
-       }    
+### 函数的变量和内部函数
+
+说了函数的原型链，这里需要说一下的变量和内部函数。
+
+#### 私有变量和内部函数
+
+私有成员，即定义函数内部的变量或函数，外部无法访问。
+    
+    function Xzavier(){
+        var name = "xzavier"; //私有变量
+        var sports = function() {console.log('basketball')}; //私有函数 
     }
-     
-    console.log(Xzavier.addTen(15));  //25
-    Xzavier.ten = 20; 
-    console.log(Xzavier.addTen(15));  //35
+    var x = new Xzavier();
+    x.name;  //undefined
 
-### 内存泄露
+如果要访问，需要对外提供接口。
 
-内存泄漏指一块被分配的内存既不能使用，又不能回收，直到浏览器进程结束。
-
-出现原因：
-
-    1.循环引用：含有DOM对象的循环引用将导致大部分当前主流浏览器内存泄露。循环 引用，简单来说假如a引用了b,b又引用了a,a和b就构成了循环引用。
-    2.JS闭包：闭包，函数返回了内部函数还可以继续访问外部方法中定义的私有变量。
-    3.Dom泄露，当原有的DOM被移除时，子结点引用没有被移除则无法回收。  
-
-  
-### JavaScript垃圾回收机制
-
-Javascript中，如果一个对象不再被引用，那么这个对象就会被GC(garbage collection)回收。如果两个对象互相引用，而不再被第3者所引用，那么这两个互相引用的对象也会被回收。垃圾回收不是时时的，因为其开销比较大，所以垃圾回收器会按照固定的时间间隔周期性的执行。
-
-函数a被b引用，b又被a外的c引用，这就是为什么函数a执行后不会被回收的原因。
-
-垃圾回收的两个方法：
-
-标记清除法：
-
-    1.垃圾回收机制给存储在内存中的所有变量加上标记，然后去掉环境中的变量以及被环境中变量所引用的变量（闭包）。
-    2.操作1之后内存中仍存在标记的变量就是要删除的变量，垃圾回收机制将这些带有标记的变量回收。
-
-引用计数法：
-
-    1.垃圾回收机制给一个变量一个引用次数，当声明了一个变量并将一个引用类型赋值给该变量的时候这个值的引用次数就加1。
-    2.当该变量的值变成了另外一个值，则这个值得引用次数减1。
-    3.当这个值的引用次数变为0的时候，说明没有变量在使用，垃圾回收机制会在运行的时候清理掉引用次数为0的值占用的空间。
-
-### 闭包的应用
-
-#### 1.维护函数内的变量安全,避免全局变量的污染。
-
-函数a中i只有函数b才能访问，而无法通过其他途径访问到。
-
-    function xzavier(){
-        var i = 1;
-        i++;
-        console.log(i);
-    }
-    xzavier();   //2 
-    console.log(x);   // x is not defined                 
-    xzavier();   //2
-
-#### 2.维持一个变量不被回收。
-
-由于闭包，函数a中i的一直存在于内存中，因此每次执行c()，都会给i自加1，且i不被垃圾回收机制回收。
-
-    function a() {  
-        var i = 1;  
-        function b() { 
-            console.log(i++); 
-        }  
-        return b; 
-    }
-    var c = a(); 
-    c();  //1
-    c();  //2
-    c();  //3
-
-#### 3.通过第1点的特性设计私有的方法和属性。
-
-    var xzavier = (function(){
-        var i = 1;
-        var s = 'xzavier';
-        function f(){
-            i++;
-            console.log(i);
+    function Xzavier(){
+        var name = "xzavier"; //私有变量
+        var sports = function() {console.log('basketball')}; //私有函数
+        return{
+            name: name,
+            sports: sports
         }
-        return {
-            i:i,
-            s:s,             
-            f:f
-        }
-    })();
-    xzavier.s;     //'xzavier'
-    xzavier.s;     //1
-    xzavier.f()    //2
-
-#### 4.操作DOM获取目标元素
-
-方法2即使用了闭包的方法，当然操作DOM还是有别的方法的，比如事件委托就比较好用。
-
-    ul id="test">
-        <li>first</li>
-        <li>second</li>
-        <li>third</li>
-    </ul>
-    // 方法一：this方法
-    var lis = document.getElementById('test').getElementsByTagName('li');
-    for(var i = 0;i < 3;i++){
-        lis[i].index = i;
-        lis[i].onclick = function(){
-            console.log(this.index);
-        };
-    } 
-    // 方法二：闭包方法
-    var lis = document.getElementById('test').getElementsByTagName('li');
-    for(var i = 0;i < 3;i++){
-        lis[i].index = i;
-        lis[i].onclick = (function(val){
-            return function() {
-                console.log(val);
-            }
-        })(i);
     }
-    // 方法三 事件委托方法
-    var oUl = document.getElementById('test');
-    oUl.addEventListener('click',function(e){
-        var lis = e.target;
-        console.log(lis); 
-    });
+    var x = new Xzavier();
+    x.name;  //"xzavier"
 
-#### 5.封装模块
+#### 静态变量和内部函数
 
-逻辑随业务复杂而复杂O(∩_∩)O~
+用点操作符定义的静态变量和内部函数就是实例不能访问到的变量和内部函数。只能通过自身去访问。
 
-    var Xzavier = function(){       
-        var name = "xzavier";       
-        return {    
-           getName : function(){    
-               return name;    
-           },    
-           setName : function(newName){    
-               name = newName;    
-           }    
-        }    
-    }();    
-    
-    console.log(person.name); //undefined，变量作用域为函数内部，外部无法访问    
-    console.log(person.getName()); // "xzavier" 
-    person.setName("xz");    
-    console.log(person.getName());  //"xz"
+    function Xzavier(){
+        Xzavier.name = "xzavier"; //静态变量
+        Xzavier.sports = function() {console.log('basketball')}; //静态函数 
+    }
+    Xzavier.name; //"xzavier"
+    var x = new Xzavier();
+    x.name;  //undefined
 
-#### 6.实现类和继承
+#### 实例变量和内部函数
 
-    function Xzavier(){       
-        var name = "xzavier";       
-        return {    
-           getName : function(){    
-               return name;    
-           },    
-           setName : function(newName){    
-               name = newName;    
-           }    
-        }    
+通过this定义给实例使用的属性和方法。
+
+    function Xzavier(){
+        this.name = "xzavier"; //实例变量
+        this.sports = function() {console.log('basketball');}; //实例函数 
+    }
+    Xzavier.name; //undefined
+    var x = new Xzavier();
+    x.name;  //"xzavier"
+
+### 原型链继承
+
+有了原型链，就可以借助原型链实现继承。
+
+    function Xzavier() {
+        this.name = 'xzavier';
+        this.sex = 'boy';
+        this.job = "jser";
     }
     
-    var xz = new Xzavier();  //Xzavier就是一个类，可以实例化
-    console.log(xz.getName());  // "xzavier"  
+    function X() {};
 
-这里是原型继承：
+X的原型X.prototype原型本身就是一个Object对象。F12打开控制台输入函数，再打印`X.prototype`:
 
-    var X = function(){};
-    X.prototype = new Xzavier(); 
-    X.prototype.sports = function(){
-        console.log("basketball");
-    };
-    var x = new X();
-    x.setName("xz");
-    x.sports();  //"basketball"
-    console.log(x.getName());  //"xz"
-
-### JavaScript作用域链
-JavaScript作用域
-
-    作用域就是变量与函数的可访问范围，即作用域控制着变量与函数的可见性和生命周期。
-    在JavaScript中，变量的作用域有全局作用域和局部作用域两种。
-
-JavaScript作用域链
-
-    JavaScript函数对象拥有可以通过代码访问的属性和一系列仅供JavaScript引擎访问的内部属性。
-    其中一个内部属性是[[Scope]]，该内部属性包含了函数被创建的作用域中对象的集合。
-    这个集合被称为函数的作用域链。
-
-执行上下文
-
-    当函数执行时，会创建一个执行上下文(execution context)，执行上下文是一个内部对象，定义了函数执行时的环境。
-    每个执行上下文都有自己的作用域链，用于标识符解析。
-    当执行上下文被创建时，而它的作用域链初始化为当前运行函数的[[Scope]]包含的对象。
-
-活动对象
-
-    这些值按照它们出现在函数中的顺序被复制到执行上下文的作用域链中。
-    它们共同组成了一个新的对象，活动对象(activation object)。
-    该对象包含了函数的所有局部变量、命名参数、参数集合以及this，然后此对象会被推入作用域链的前端。
-    当执行上下文被销毁，活动对象也随之销毁。
-    活动对象是一个拥有属性的对象，但它不具有原型而且不能通过JavaScript代码直接访问。
-
-查找机制:
-
-    1.当函数访问一个变量时，先搜索自身的活动对象，如果存在则返回，如果不存在将继续搜索函数父函数的活动对象，依次查找，直到找到为止。
-    2.如果函数存在prototype原型对象，则在查找完自身的活动对象后先查找自身的原型对象，再继续查找。
-    3.如果整个作用域链上都无法找到，则返回undefined。
-
-在执行上下文的作用域链中，标识符所在的位置越深，读写速度就会越慢。全局变量总是存在于执行上下文作用域链的最末端，因此在标识符解析的时候，查找全局变量是最慢的。
-
-so
-
-    在编写代码的时候应尽量少使用全局变量，尽可能使用局部变量。
-    我们经常使用局部变量先保存一个多次使用的需要跨作用取的值再使用。
-
-### 再析闭包
-
-    function a() {  
-        var i = 1;  
-        function b() { 
-            console.log(i++); 
-        }  
-        return b; 
+    Object {
+        constructor: X()
+        __proto__: Object
     }
-    var c = a(); 
-    c();
+
+prototype本身是一个Object对象的实例，所以其原型链指向的是Object的原型。
+
+#### X.prototype = Xzavier.prototype
+ 
+    X.prototype = Xzavier.prototype;
+
+这样相当于把X的prototype指向了Xzavier的prototype；
+这样只是继承了Xzavier的prototype方法，Xzavier中的自定义方法则不继承。
+
+    X.prototype.love = "dog";
+
+这样也会改变Xzavier的prototype，所以这样基础就不好。
+
+####X.prototype = new Xzavier()
+
+    X.prototype = new Xzavier();
+
+这样产生一个Xzavier的实例，同时赋值给X的原型，也即X.prototype相当于对象： 
+
+    {
+        name: "xzavier", 
+        sex: "boy", 
+        job: "jser",
+        [[Prototype]] : Xzavier.prototype
+    }
+
+这样就把Xzavier的原型通过X.prototype.[[Prototype]]这个对象属性保存起来，构成了原型的链接。
+不过，这样X产生的对象的构造函数发生了改变，因为在X中没有constructor属性，只能从原型链找到Xzavier.prototype，读出constructor:Xzavier。
+
+    var x = new X;
+    console.log(x.constructor);
     
-    1.当定义函数a，js解释器将函数a的作用域链设置为定义a时a所在的环境。
-    2.执行函数a的时候，a会进入相应的执行上下文。
-    3.在创建执行上下文的过程中，首先会为a添加一个scope属性，即a的作用域，其值就为a的作用域链。
-    4.然后执行上下文会创建一个活动对象。
-    5.创建完活动对象后，把活动对象添加到a的作用域链的最顶端。此时a的作用域链包含了两个对象：a的活动对象和window对象。
-    6.接着在活动对象上添加一个arguments属性，它保存着调用函数a时所传递的参数。
-    7.最后把所有函数a的形参和内部的函数b的引用也添加到a的活动对象上。    
-      在这一步中，完成了函数b的的定义（如同a），函数b的作用域链被设置为b所被定义的环境，即a的作用域。
-    8.整个函数a从定义到执行的步骤完成。
+    输出：
+    Xzavier() {
+        this.name = 'xzavier';
+        this.sex = 'boy';
+        this.job = "jser";
+    }
+ 
+手动改正：
 
-a返回函数b的引用给c，因为函数b的作用域链包含了对函数a的活动对象的引用，也就是说b可以访问到a中定义的所有变量和函数。函数b被c引用，函数b又依赖函数a，因此函数a在返回后不会被GC回收，所以形成了闭包。
+    X.prototype.constructor = X;
+
+这是X的原型就多了个属性constructor，指向X。这样就OK。
+
+    function Xzavier() {
+        this.name = 'xzavier';
+        this.sex = 'boy';
+        this.job = "jser";
+    }
+
+    function X(){}
+    X.prototype = new Xzavier();
+    var x = new X()
+    x.name  // "xzavier"
+
+### `[[Prototype]]，__proto__，prototype`
+
+关于我们经常遇到的`[[Prototype]]，__proto__，prototype`：
+
+我们在控制台打印 `var str = new String('xzavier')`，展开查看属性时，只会看到`__proto__`，所以起作用的是`__proto__`，`__proto__`是对象的内置属性，是每个对象都有的属性，但是这个属性使用不标准，所以不建议直接使用。但是，我们的原型链就是基于 `__proto__`的。通过构造函数得到的实例的 `__proto__` 属性，指向其对应的原型对象 `String.prototype`，这正如文中我们打印 `var str = new String('xzavier')` 中看到的一样。
 
 
+`[[Prototype]]`是一个隐藏属性，指向的是这个对象的原型。几乎每个对象有一个`[[prototype]]`属性。
+
+而`prototype`是每个函数对象都具有的属性，指向原型对象，如果原型对象被添加属性和方法，那么由应的构造函数创建的实例会继承`prototype`上的属性和方法，这也是我们在代码中经常遇到的。构造函数产生实例时，实例通过其对应原型对象的 constructor 访问对应的构造函数对象。所以，我们继承出来的实例往往没有constructor，只是通过原型链查找，会让我们产生错觉，可参见本系列原型链文章。
+
+### hasOwnProperty
+
+hasOwnProperty是Object.prototype的一个方法，判断一个对象是否包含自定义属性而不是原型链上的属性。
+hasOwnProperty 是JavaScript中唯一一个处理属性但是不查找原型链的函数。
+
+    function Xzavier() {
+        this.name = 'xzavier';
+        this.sex = 'boy';
+        this.job = "jser";
+    }
+    //给A的原型对象添加属性
+    Xzavier.prototype.sports = function() {console.log('basketball');};
+    
+    var x = new Xzavier();
+    x.name; // 'xzavier'
+    'sex' in x; // true
+    
+    x.hasOwnProperty('job'); // true
+    x.hasOwnProperty('sports'); // false
+
+当检查对象上某个属性是否存在时，hasOwnProperty 是非常推荐的方法。
+
+
+继承在js中使用频繁。ES6也设计了专门的CLASS语法糖供开发者使用。
+更多继承方法在新的文章中更新...
+
+难得周末，应该运动O(∩_∩)O~ 打打篮球，运动运动，有代码，有篮球，有生活。。。
+长时间不动肩膀（其实身体各地方都是），还真疼啊。希望程序猿们都健健康康的！！！
+
+
+  [1]: 
+
+
+  [1]: /img/bVGJmn
