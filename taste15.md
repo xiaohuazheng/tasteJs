@@ -150,7 +150,7 @@ prototype本身是一个Object对象的实例，所以其原型链指向的是Ob
 
 这样也会改变Xzavier的prototype，所以这样基础就不好。
 
-####X.prototype = new Xzavier()
+#### X.prototype = new Xzavier()
 
     X.prototype = new Xzavier();
 
@@ -234,7 +234,5 @@ hasOwnProperty 是JavaScript中唯一一个处理属性但是不查找原型链�
 长时间不动肩膀（其实身体各地方都是），还真疼啊。希望程序猿们都健健康康的！！！
 
 
-  [1]: 
 
-
-  [1]: /img/bVGJmn
+  [1]: https://sfault-image.b0.upaiyun.com/149/829/1498299667-584cb6c104830_articlex
