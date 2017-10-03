@@ -284,7 +284,9 @@ sort() 方法对数组的元素做原地的排序，并返回这个数组。
     map()            返回一个由原数组中的每个元素调用一个指定方法后的返回值组成的新数组。
     every()          测试数组的所有元素是否都通过了指定函数的测试。
     some()           测试数组中的某些元素是否通过了指定函数的测试。
+
 小试：（欢迎补充和斧正问题，更多方法延伸阅读：[ES6数组的扩展][4]）
+
     ar arr = ['xzavier',123,'jser'];
     console.log(arr.valueOf());  //['xzavier',123,'jser']
     console.log(arr.toString());  //xzavier,123,jser
@@ -309,7 +311,9 @@ sort() 方法对数组的元素做原地的排序，并返回这个数组。
     [2, 5, 1, 4, 13].every(function (element, index, array) {
         return (element >= 0);
     });  //true
-###趣味探索
+
+### 趣味探索
+
     [1,2] + [3,4] == "1,23,4";  //true
     ++[[]][+[]]+[+[]] == '10';  //true
     console.log ([] == ![]);    //true  
