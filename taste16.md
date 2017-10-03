@@ -53,7 +53,8 @@ length属性返回数组的长度，是一个可变属性，表示一个数组�
 
 数组去重：[数组去重演化][2]
 
-###`constructor`属性
+### `constructor`属性
+
 `constructor`属性返回创建对象的函数，即构造函数。如下：
 
     var arr = [1,2,3];
@@ -61,9 +62,13 @@ length属性返回数组的长度，是一个可变属性，表示一个数组�
     arr.constructor === Array  //true  即 new Array
     var a = new Array();
     a.constructor === Array  //true
+
 对于数组来说，这个属性还是罕见使用的。
-##数组判断
-###Array.isArray()
+
+## 数组判断
+
+### Array.isArray()
+
 `Array.isArray()` 方法用来判断某个值是否为Array。如果是，则返回 true，否则返回 false
 
     Array.isArray([]);  //true
@@ -73,50 +78,68 @@ length属性返回数组的长度，是一个可变属性，表示一个数组�
     Array.isArray({});  //false
     Array.isArray(123);  //false
     Array.isArray('xzavier');  //false
-###利用属性自己写方法
+
+### 利用属性自己写方法
+
 `Array.isArray()`在ES5之前不支持，就自己写。不过现在都到ES6了，可以不管了。
+    
     Array.prototype.isArray = Array.prototype.isArray || function() {
         return Object.prototype.toString.call(this) === "[object Array]";
     }
     [1,2,3].isArray(); //true
-##数组遍历
+
+## 数组遍历
+
 关于这几个遍历语句的详细讲解可参考：[温故js系列（8）-流程控制][3]
-###经典的`for`
+
+### 经典的`for`
 
     for (var index = 0; index < arr.length; index++) {
         console.log(arr[index]);
     }
+
 这种写法很经典，就是语句多，但是性能好。
-###ES5的`forEach`
+
+### ES5的`forEach`
 
     arr.forEach(function (value) {
         console.log(value);
     });
+
 这种写法简洁，但这种方法也有一个小缺陷：你不能使用break语句中断循环，也不能使用return语句返回到外层函数。
-###不建议的`for-in`    
+
+### 不建议的`for-in`    
 
     for (var i in arr) { 
         console.log(arr[i]);
     }
-`for-in`是为普通对象设计的，你可以遍历得到字符串类型的键，因此不适用于数组遍历。但是它能遍历数组，作用于数组的`for-in`循环体除了遍历数组元素外，还会遍历自定义属性。举个例子，如果你的数组中有一个可枚举属性arr.name，循环将额外执行一次，遍历到名为“name”的索引。就连数组原型链上的属性都能被访问到。所以，不建议使用。
-###ES6的`for-of`
+
+`for-in`是为普通对象设计的，你可以遍历得到字符串类型的键，因此不适用于数组遍历。但是它能遍历数组，作用于数组的`for-in`循环体除了遍历数组元素外，还会遍历自定义属性。
+
+举个例子，如果你的数组中有一个可枚举属性arr.name，循环将额外执行一次，遍历到名为“name”的索引。就连数组原型链上的属性都能被访问到。所以，不建议使用。
+
+### ES6的`for-of`
 
     for (var value of arr) {
         console.log(value); // 1 2 3 
     }
+
 这是最简洁、最直接的遍历数组元素的语法。这个方法避开了for-in循环的所有缺陷。与forEach()不同的是，它可以正确响应break、continue和return语句。
 
     for (var value of arr) {
         if(value == 2){break;}
         console.log(value);  //1
     }
-##数组方法细说
-###`splice`插入、删除、替换
+
+## 数组方法细说
+
+### `splice`插入、删除、替换
+
 splice() 方法可以插入、删除或替换数组的元素，注意：`同时改变了原数组`。
 
-1.删除-删除元素，传两个参数，要删除第一项的位置和第二个要删除的项数 
-2.插入-向数组指定位置插入任意项元素。三个参数，第一个参数（位置），第二个参数（0），第三个参数（插入的项）
-3.替换-向数组指定位置插入任意项元素，同时删除任意数量的项，三个参数。第一个参数（起始位置），第二个参数（删除的项数），第三个参数（插入任意数量的项）
+    1.删除-删除元素，传两个参数，要删除第一项的位置和第二个要删除的项数 
+    2.插入-向数组指定位置插入任意项元素。三个参数，第一个参数（位置），第二个参数（0），第三个参数（插入的项）
+    3.替换-向数组指定位置插入任意项元素，同时删除任意数量的项，三个参数。第一个参数（起始位置），第二个参数（删除的项数），第三个参数（插入任意数量的项）
 
     var arr = ["q","w","e"]; 
     //删除 
@@ -131,14 +154,18 @@ splice() 方法可以插入、删除或替换数组的元素，注意：`同时�
     var replace = arr.splice(1,1,"t"); //删除一项，插入一项 
     console.log(arr); //r,t,e
     console.log(replace); //q,返回删除的项 
-###`sort` 排序
+
+### `sort` 排序
+
 sort() 方法对数组的元素做原地的排序，并返回这个数组。 
+    
     var arr = [1,2,4,3,1,1,2];
     console.log(arr.sort());//[1, 1, 1, 2, 2, 3, 4]
     
     然而：
     var arr = [1,2,10,4,3,1,1,2];
     console.log(arr.sort());//[1, 1, 1, 10, 2, 2, 3, 4]
+
 这是因为`sort`排序可能是不稳定的，默认按照字符串的Unicode码位点排序。
 
 但是，`sort()`方法接受一个参数，这个参数是一个函数，可选，用来指定按某种顺序进行排列的函数。如果省略，元素按照转换为的字符串的诸个字符的Unicode位点进行排序。
@@ -147,8 +174,11 @@ sort() 方法对数组的元素做原地的排序，并返回这个数组。
     console.log(arr.sort(function(a,b){
         return a-b; 
     })); // [1, 1, 1, 2, 2, 3, 4, 10]
+
 这个函数就是我们自己控制了，我们想要什么样的排序就改变这个参数函数的逻辑即可。
-###`slice`截取、转化arguments伪数组
+
+### `slice`截取、转化arguments伪数组
+
 `slice()`方法可从已有的数组中返回选定的元素数组。不会修改原数组，只会会浅复制数组的一部分到一个新的数组，并返回这个新数组。
 
 语法：`arrayObject.slice(start,end)` 参数可为正负。
@@ -163,6 +193,7 @@ sort() 方法对数组的元素做原地的排序，并返回这个数组。
     arr.slice(1,-1);   //  [2,3,4]
     arr.slice(-3,-2);  //  [3]
     var arr1 = arr.slice(0); //返回数组的拷贝数组，是一个新的数组，不是赋值指向
+
 `slice`方法经常用来截取一个数组，不过它更常用在将伪数组转化为真数组。平时我们的函数传的参数`arguments`是一个伪数组，很多数组的方法不能使用，我们就需要将伪数组转化为真数组。
 
     function test() {
@@ -179,7 +210,9 @@ sort() 方法对数组的元素做原地的排序，并返回这个数组。
         console.log(JSON.stringify(arr));
     }
     test(1,2,3); //[1,2,3,"xza"]
-###`filter` 过滤
+
+### `filter` 过滤
+
 `filter()` 方法使用指定的函数测试所有元素，并创建一个包含所有通过测试的元素的新数组。简单来说就是对数组进行过滤，返回一个过滤过的数组。
 
 语法：`array.filter(function(currentValue,index,arr), thisValue)`
@@ -194,24 +227,33 @@ sort() 方法对数组的元素做原地的排序，并返回这个数组。
         return this.filter((item, index, arr) => arr.indexOf(item) === index);
     }
     [11,2,1,1,2,3,1,2,4,5,23,2].unique(); //[11, 2, 1, 3, 4, 5, 23]
+
 `filter()` 不会对空数组进行检测，不会改变原始数组。
-###`concat` 连接数组
+
+### `concat` 连接数组
 
     var arr1 = [1,2,3];
     var arr2 = [4,5,6];
     var arr3 = arr1.concat(arr2);  //[1, 2, 3, 4, 5, 6]
     arr3.concat(7); //[1, 2, 3, 4, 5, 6, 7]
+
 我们平时都是这么使用的，如果需要连接两个数组的元素时，中间插元素，可以
+
     var arr3 = arr1.concat('xzavier', arr2); //[1, 2, 3, "xzavier", 4, 5, 6]
+
 不加参数相当于拷贝，返回数组的拷贝数组，是一个新的数组，并不是指向原来数组。
+
     var arr4 = arr1.concat(); //[1,2,3]
     var arr5 = arr1;
     arr4 === arr1; //false
     arr5 === arr1; //true
-###插入删除
+
+### 插入删除
+
 前面讲了个`splice`可以在数组的任何位置插入删除元素，这儿讲的是只能在首尾插入删除的方法，用起来也很方便。
 
 在数组尾插入删除：
+
     push()方法可以接收任意数量的参数，把它们逐个添加到数组的末尾，并返回修改后数组的长度。
     pop()方法则从数组末尾移除最后一个元素，减少数组的length值，然后返回移除的元素。
 
@@ -219,7 +261,9 @@ sort() 方法对数组的元素做原地的排序，并返回这个数组。
     arr.push(4);  // 返回的length 4
     arr.pop();   //返回的删除值  4
     arr  //[1, 2, 3]
+
 在数组头插入删除：
+
     unshift()方法为数组的前端添加一个元素
     shift()方法从数组前端移除一个元素
     
@@ -227,7 +271,8 @@ sort() 方法对数组的元素做原地的排序，并返回这个数组。
     arr.unshift(4);  // 返回的length 4
     arr.shift();   //返回的删除值  4
     arr  //[1, 2, 3]
-###其他方法
+
+### 其他方法
 
     方法                使用
     concat()         连接两个或更多的数组，并返回结果。
