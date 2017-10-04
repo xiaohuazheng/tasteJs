@@ -70,7 +70,10 @@ JavaScript中，有很多内置的Object的子类型，我们通常称为内置�
 在JavaScript中，几乎所有对象都是Object的实例。而Object有一个属性prototype，指向原型对象（js里所有构造函数都有一个prototype属性，指向原型对象）。我们在实例化一个对象时，实例会继承原型对象上的属性和方法。
 
 可以控制台查看 `String.prototype`
-然后再： `var str = new String('xzavier');`
+然后再： 
+
+    var str = new String('xzavier');
+
 我们的str继承了String.prototype上的属性和方法，String又继承了Obeject.prototype上的方法。
 
 不过说是继承，说是指向引用比较好。因为对象在查找某个属性的时候，会首先遍历自身的属性，如果没有则会继续查找`[[Prototype]]`引用的对象，如果再没有则继续查找`[[Prototype]].[[Prototype]]`引用的对象，依次类推，直到`[[Prototype]].….[[Prototype]]`为`undefined`
