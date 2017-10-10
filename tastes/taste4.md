@@ -7,13 +7,12 @@ JavaScript 有一系列操作数据值的运算符，运算符按照特定运算
 一元运算符只能操作一个值。
 
 累加累减运算符：
- 
-    var xzavier = 123;
+    
+    var xzavier = 123;
     xzavier++  //把变量累加1，相当于xavier = xavier + 1
     ++xzavier  //把变量累加1，相当于xavier = xavier + 1
     xzavier--  //把变量累减1，相当于xavier = xavier - 1
-    --xzavier  //把变量累减1，相当于xavier = xavier - 1
-    
+    --xzavier  //把变量累减1，相当于xavier = xavier - 1 
 
 上述代码不只是`++--`前后置的区别，当有赋值操作时，区别为：
 
@@ -127,7 +126,6 @@ JavaScript 有一系列操作数据值的运算符，运算符按照特定运算
 
 7. 在全等和全不等的判断上，只有值和类型都相等，才返回 true，否则返回 false。
 
-
     123 == 123; //true
 
     '123' == 123; //true，'123'会转成成数值123
@@ -162,7 +160,7 @@ JavaScript 有一系列操作数据值的运算符，运算符按照特定运算
     null == 0 //false
 
     '123' == 123 //true
-    
+
     '123' === 123 //false
 
 
