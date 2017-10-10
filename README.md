@@ -20,6 +20,12 @@
 16. [温故js系列（15）-原型&原型链&原型继承][16]
 17. [温故js系列（16）-数组&数组方法使用详解][17]
 18. [温故js系列（17）-对象&对象使用][18]
+19. [温故js系列（17）-详解加法运算符][19]
+
+
+# License
+
+所有文章采用[知识共享署名-非商业性使用-相同方式共享 3.0 中国大陆许可协议][20]进行许可。
 
 
   [1]: https://github.com/xiaohuazheng/tasteJs/issues/2
@@ -40,5 +46,7 @@
   [16]: https://github.com/xiaohuazheng/tasteJs/issues/17
   [17]: https://github.com/xiaohuazheng/tasteJs/issues/18
   [18]: https://github.com/xiaohuazheng/tasteJs/issues/19
+  [19]: https://github.com/xiaohuazheng/tasteJs/issues/20
+  [20]: https://creativecommons.org/licenses/by-nc-sa/3.0/cn/
 
 
