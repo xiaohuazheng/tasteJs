@@ -14,13 +14,12 @@
 10. [温故js系列（10）-事件event][10]
 11. [温故js系列（11）-BOM][11]
 12. [温故js系列（12）-Ajax&&优缺点&&node后端][12]
-13. [温故js系列（13.1）-有意思的30题_题目][13]
-14. [温故js系列（13.2）-有意思的30题_解析][14]
-15. [温故js系列（14）-闭包&垃圾回收&内存泄露&闭包应用&作用域链&再析闭包][15]
-16. [温故js系列（15）-原型&原型链&原型继承][16]
-17. [温故js系列（16）-数组&数组方法使用详解][17]
-18. [温故js系列（17）-对象&对象使用][18]
-19. [温故js系列（18）-详解加法运算符][19]
+13. [温故js系列（13）-TCP三次握手&Render Tree页面渲染=>从输入URL到页面显示的过程？][13]
+14. [温故js系列（14）-闭包&垃圾回收&内存泄露&闭包应用&作用域链&再析闭包][14]
+15. [温故js系列（15）-原型&原型链&原型继承][15]
+16. [温故js系列（16）-数组&数组方法使用详解][16]
+17. [温故js系列（17）-对象&对象使用][17]
+18. [温故js系列（18）-详解加法运算符][18]
 
 # 勘误
 
@@ -30,7 +29,7 @@
 
 # License
 
-所有文章采用[知识共享署名-非商业性使用-相同方式共享 3.0 中国大陆许可协议][20]进行许可。
+所有文章采用[知识共享署名-非商业性使用-相同方式共享 3.0 中国大陆许可协议][19]进行许可。
 
 
   [1]: https://github.com/xiaohuazheng/tasteJs/issues/2
@@ -46,12 +45,11 @@
   [11]: https://github.com/xiaohuazheng/tasteJs/issues/12
   [12]: https://github.com/xiaohuazheng/tasteJs/issues/13
   [13]: https://github.com/xiaohuazheng/tasteJs/issues/14
-  [14]: https://github.com/xiaohuazheng/tasteJs/issues/15
-  [15]: https://github.com/xiaohuazheng/tasteJs/issues/16
-  [16]: https://github.com/xiaohuazheng/tasteJs/issues/17
-  [17]: https://github.com/xiaohuazheng/tasteJs/issues/18
-  [18]: https://github.com/xiaohuazheng/tasteJs/issues/19
-  [19]: https://github.com/xiaohuazheng/tasteJs/issues/20
-  [20]: https://creativecommons.org/licenses/by-nc-sa/3.0/cn/
+  [14]: https://github.com/xiaohuazheng/tasteJs/issues/16
+  [15]: https://github.com/xiaohuazheng/tasteJs/issues/17
+  [16]: https://github.com/xiaohuazheng/tasteJs/issues/18
+  [17]: https://github.com/xiaohuazheng/tasteJs/issues/19
+  [18]: https://github.com/xiaohuazheng/tasteJs/issues/20
+  [19]: https://creativecommons.org/licenses/by-nc-sa/3.0/cn/
 
 
